@@ -15,7 +15,8 @@ impl Plugin for LoadingPlugin {
         )
         .add_collection_to_loading_state::<_, FontAssets>(GameState::Loading)
         .add_collection_to_loading_state::<_, AudioAssets>(GameState::Loading)
-        .add_collection_to_loading_state::<_, TextureAssets>(GameState::Loading);
+        .add_collection_to_loading_state::<_, TextureAssets>(GameState::Loading)
+        .add_collection_to_loading_state::<_, SceneAssets>(GameState::Loading);
     }
 }
 
@@ -38,4 +39,10 @@ pub struct AudioAssets {
 pub struct TextureAssets {
     #[asset(path = "textures/bevy.png")]
     pub texture_bevy: Handle<Image>,
+}
+
+#[derive(AssetCollection, Resource, Clone)]
+pub(crate) struct SceneAssets {
+    #[asset(path = "scenes/old_town.glb#Scene0")]
+    pub(crate) level: Handle<Scene>,
 }

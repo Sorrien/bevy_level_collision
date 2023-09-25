@@ -35,7 +35,10 @@ fn setup_menu(
     font_assets: Res<FontAssets>,
     button_colors: Res<ButtonColors>,
 ) {
-    commands.spawn(Camera2dBundle::default());
+    commands.spawn(Camera3dBundle {
+        transform: Transform::from_xyz(0.7, 20., 1.0).looking_at(Vec3::new(0.0, 0.3, 0.0), Vec3::Y),
+        ..default()
+    });
     commands
         .spawn(ButtonBundle {
             style: Style {
