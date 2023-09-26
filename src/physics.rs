@@ -39,7 +39,6 @@ pub(crate) fn read_colliders(
             for (collider_entity, collider_mesh) in
                 Mesh::search_in_children(entity, &children, &meshes, &mesh_handles)
             {
-                println!("{:?}", name);
                 let rapier_collider =
                     Collider::from_bevy_mesh(collider_mesh, &ComputedColliderShape::TriMesh)
                         .context("Failed to create collider from mesh")?;
