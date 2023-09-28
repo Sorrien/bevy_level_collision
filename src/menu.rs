@@ -36,7 +36,7 @@ fn setup_menu(
     button_colors: Res<ButtonColors>,
 ) {
     commands.spawn(Camera3dBundle {
-        transform: Transform::from_xyz(0.7, 20., 1.0).looking_at(Vec3::new(0.0, 0.3, 0.0), Vec3::Y),
+        transform: Transform::from_xyz(100.0, 20., 50.0).looking_at(Vec3::new(-50.0, 0.3, 0.0), Vec3::Y),
         ..default()
     });
     commands

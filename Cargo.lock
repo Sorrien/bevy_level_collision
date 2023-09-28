@@ -523,7 +523,6 @@ dependencies = [
  "bevy_rapier3d",
  "embed-resource",
  "image",
- "nalgebra",
  "rand",
  "winit",
 ]

@@ -61,7 +61,6 @@ bevy_rapier3d = { version = "0.22", features = [
 ] }
 anyhow = "1"
 bevy_mod_sysfail = "3"
-nalgebra = "0.32"
 
 # keep the following in sync with Bevy's dependencies
 winit = { version = "0.28", default-features = false }

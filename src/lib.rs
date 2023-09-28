@@ -52,7 +52,11 @@ impl Plugin for GamePlugin {
     }
 }
 
-pub(crate) fn setup(mut commands: Commands, scene_handles: Res<SceneAssets>) {
+pub(crate) fn setup(
+    mut commands: Commands,
+    scene_handles: Res<SceneAssets>,
+    mut meshes: ResMut<Assets<Mesh>>,
+) {
     commands.spawn((SceneBundle {
         scene: scene_handles.level.clone(),
         ..default()
@@ -72,9 +76,21 @@ pub(crate) fn setup(mut commands: Commands, scene_handles: Res<SceneAssets>) {
         ..default()
     });
 
+    let sphere_mesh = meshes.add(
+        shape::UVSphere {
+            radius: 1.,
+            ..default()
+        }
+        .into(),
+    );
+
     commands.spawn((
-        TransformBundle::from(Transform::from_xyz(0.0, 10.0, 0.0)),
-        Collider::ball(1.0),
+        TransformBundle::from(Transform::from_xyz(50.0, 50.0, 50.0)),
+        Collider::from_bevy_mesh(
+            meshes.get(&sphere_mesh).unwrap(),
+            &ComputedColliderShape::TriMesh,
+        )
+        .unwrap(),
         RigidBody::Dynamic,
     ));
 }

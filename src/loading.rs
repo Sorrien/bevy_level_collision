@@ -43,6 +43,6 @@ pub struct TextureAssets {
 
 #[derive(AssetCollection, Resource, Clone)]
 pub(crate) struct SceneAssets {
-    #[asset(path = "scenes/old_town.glb#Scene0")]
+    #[asset(path = "scenes/waterfall.glb#Scene0")]
     pub(crate) level: Handle<Scene>,
 }

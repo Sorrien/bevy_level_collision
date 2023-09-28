@@ -1,6 +1,6 @@
 use crate::util::trait_extension::MeshExt;
 use crate::GameState;
-use anyhow::{Context, Result};
+use anyhow::{Result, Context};
 use bevy::prelude::*;
 use bevy_mod_sysfail::macros::*;
 use bevy_rapier3d::prelude::*;
@@ -12,14 +12,6 @@ impl Plugin for PhysicsPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
             .add_plugins(RapierDebugRenderPlugin::default())
-            .insert_resource(RapierConfiguration {
-                timestep_mode: TimestepMode::Variable {
-                    max_dt: 1.0 / 20.0,
-                    time_scale: 1.0,
-                    substeps: 4,
-                },
-                ..default()
-            })
             .add_systems(Update, read_colliders.run_if(in_state(GameState::Playing)));
     }
 }
@@ -35,7 +27,7 @@ pub(crate) fn read_colliders(
     #[cfg(feature = "tracing")]
     let _span = info_span!("read_colliders").entered();
     for (entity, name) in &added_name {
-        if name.to_lowercase().contains("[collider]") {
+        if name.to_lowercase().contains("[collider]") || name.to_lowercase().contains("suzanne") {
             for (collider_entity, collider_mesh) in
                 Mesh::search_in_children(entity, &children, &meshes, &mesh_handles)
             {
